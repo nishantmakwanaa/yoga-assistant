@@ -1,17 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Cormorant+Garamond:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  :root {
+    --background: 40 30% 97%;
+    --foreground: 160 25% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 160 25% 12%;
+
+    --popover: 35 25% 98%;
+    --popover-foreground: 160 20% 15%;
+
+    --primary: 150 25% 45%;
+    --primary-foreground: 35 30% 98%;
+
+    --secondary: 35 20% 90%;
+    --secondary-foreground: 160 20% 20%;
+
+    --muted: 35 15% 92%;
+    --muted-foreground: 160 10% 45%;
+
+    --accent: 15 50% 60%;
+    --accent-foreground: 35 30% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 35 20% 88%;
+    --input: 35 20% 88%;
+    --ring: 150 25% 45%;
+
+    --radius: 1rem;
+
+    /* Custom yoga colors */
+    --sage: 155 35% 42%;
+    --sage-light: 155 25% 88%;
+    --sage-dark: 155 40% 28%;
+    --cream: 40 35% 95%;
+    --cream-dark: 40 30% 88%;
+    --terracotta: 18 55% 55%;
+    --terracotta-light: 18 45% 75%;
+    --earth: 30 25% 25%;
+    --sky: 200 45% 65%;
+
+    /* Gradients */
+    --gradient-zen: linear-gradient(135deg, hsl(150 25% 45% / 0.1), hsl(35 30% 96%), hsl(15 50% 60% / 0.1));
+    --gradient-sage: linear-gradient(180deg, hsl(150 25% 45%), hsl(150 30% 35%));
+    --gradient-warm: linear-gradient(135deg, hsl(35 30% 96%), hsl(15 45% 90%));
+    --gradient-glow: radial-gradient(circle at center, hsl(150 25% 45% / 0.2), transparent 70%);
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(160 20% 15% / 0.08);
+    --shadow-glow: 0 0 40px hsl(150 25% 45% / 0.15);
+    --shadow-float: 0 20px 50px -15px hsl(160 20% 15% / 0.15);
+
+    --sidebar-background: 35 25% 98%;
+    --sidebar-foreground: 160 20% 15%;
+    --sidebar-primary: 150 25% 45%;
+    --sidebar-primary-foreground: 35 30% 98%;
+    --sidebar-accent: 35 20% 92%;
+    --sidebar-accent-foreground: 160 20% 15%;
+    --sidebar-border: 35 20% 88%;
+    --sidebar-ring: 150 25% 45%;
+  }
+
+  .dark {
+    --background: 160 20% 8%;
+    --foreground: 35 25% 95%;
+
+    --card: 160 18% 12%;
+    --card-foreground: 35 25% 95%;
+
+    --popover: 160 18% 12%;
+    --popover-foreground: 35 25% 95%;
+
+    --primary: 150 30% 55%;
+    --primary-foreground: 160 20% 8%;
+
+    --secondary: 160 15% 18%;
+    --secondary-foreground: 35 25% 90%;
+
+    --muted: 160 12% 20%;
+    --muted-foreground: 35 15% 60%;
+
+    --accent: 15 45% 55%;
+    --accent-foreground: 35 30% 98%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 160 12% 20%;
+    --input: 160 12% 20%;
+    --ring: 150 30% 55%;
+
+    --sage: 150 30% 55%;
+    --sage-light: 150 20% 25%;
+    --sage-dark: 150 35% 70%;
+    --cream: 160 20% 8%;
+    --cream-dark: 160 18% 12%;
+    --terracotta: 15 45% 55%;
+    --terracotta-light: 15 40% 35%;
+    --earth: 25 15% 70%;
+    --sky: 200 35% 50%;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3 {
+    @apply font-serif;
+  }
+}
+
+@layer utilities {
+  .gradient-zen {
+    background: var(--gradient-zen);
+  }
+
+  .gradient-sage {
+    background: var(--gradient-sage);
+  }
+
+  .gradient-warm {
+    background: var(--gradient-warm);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .shadow-float {
+    box-shadow: var(--shadow-float);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--sage)), hsl(var(--earth)));
+  }
+}
+
+/* Breathing animation */
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 3s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+/* Pose detection overlay */
+.pose-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Video mirror effect */
+.video-mirror {
+  transform: scaleX(-1);
 }
